@@ -30,6 +30,17 @@ const US_STATES = [
 
 // Define the functional component
 export default function StatesApp() {
+  return(
+    <View style={styles.container}>
+        <FlatList 
+          data={US_STATES} // Provide the data array
+          keyExtractor={(item) => item.key}
+          renderItem={({ item }) => (
+            <Text style={styles.itemText}>{item.key}</Text>
+          )}
+        />
+    </View>
+  );
 }
 
 // Create styles using StyleSheet (cleaner than inline styles)
