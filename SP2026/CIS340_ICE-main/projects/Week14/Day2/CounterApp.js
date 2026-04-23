@@ -4,6 +4,44 @@ import { View, Text, Button, StyleSheet } from 'react-native';
 
 // Main component of the Counter App
 export default function CounterApp() {
+
+  const [count, setCount] = useState(0);
+
+  function increaseCount () {
+    setCount(previous => previous + 1);
+  }
+
+  function decreaseCount () {
+    setCount(previous => previous - 1);
+  }
+
+  function resetCount() {
+    setCount(0);
+  }
+
+  return (
+
+    <View style={styles.container}>
+
+      <Text style={styles.text}>Count: {count}</Text>
+
+      <View style={styles.buttonGroup}>
+        <Button title="Increase" onPress={increaseCount} />
+      </View>
+
+      <View style={styles.buttonGroup}>
+        <Button title="Decrease" onPress={decreaseCount} />
+      </View>
+
+      <View style={styles.buttonGroup}>
+        <Button title="Reset" onPress={resetCount} />
+      </View>
+
+    </View>
+
+
+  );
+
 }
 
 // Styles for the app

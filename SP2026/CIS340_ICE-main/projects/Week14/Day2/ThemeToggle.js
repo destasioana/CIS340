@@ -4,6 +4,26 @@ import { View, Text, Button, StyleSheet } from 'react-native';
 
 // Main App component
 export default function App() {
+
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  function toggleTheme() {
+    setIsDarkMode(!isDarkMode);
+  }
+
+  const themeStyles = isDarkMode ? darkStyles : lightStyles;
+
+  return ( 
+    <View style={[styles.container, themeStyles.container]}>
+
+      <Text style={[styles.text, themeStyles.text]}>
+        {isDarkMode ? 'Dark Mode' : 'Light Mode'}
+      </Text>
+      <Button title="Toggle Theme" onPress={toggleTheme} />
+
+    </View>
+
+  );
 }
 
 // Base styles shared across themes
