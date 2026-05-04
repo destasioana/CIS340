@@ -1,5 +1,5 @@
 // Import necessary components from React and React Native
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import {
   View,
   Text,
@@ -11,6 +11,74 @@ import {
 
 // Main App component
 export default function App() {
+
+  const [taskInput, setTaskInput] = useState('');
+  const [taskList, setTaskList] = useState('');
+
+
+  function addTask() { 
+
+    if (taskInput.trim()) { 
+
+        const updatedList = [...taskList, taskInput]; // ... creates a copy
+        setTaskList(updatedList);
+
+        setTaskInput('');
+    }
+  }
+
+  function deleteTask(indexToDelete) { 
+
+    const updatedList = [...taskList];
+
+    updatedList.splice(indexToDelete, 1);
+
+    setTaskList(updatedList);
+
+  }
+
+  return (
+    <View style={styles.container}>
+
+      <TextInput 
+        style={styles.input}
+        placeholder="Enter a task"
+        value={taskInput}
+        onChangeText={function (text) {
+          setTaskInput(text);
+        }}
+      />
+
+        <Button title="Add Task" onPress={addTask}/>
+
+
+        <FlatList
+          data={taskList} // Data source for the list
+          keyExtractor={function (item, index ) {
+            return index.toString(); //Unique key for each item (using index)
+          }}
+          renderItem={function ({ item, index}) {
+            return (
+              <View style={styles.taskContainer}>
+                <Text style={styles.taskContainer}>{item}</Text>
+
+                <Button
+                  title="Delete"
+                  onPress={function() {
+                    deleteTask(index);
+                  }}
+                />
+              </View>
+
+            );
+          }}
+        />
+        
+    </View>
+  );
+
+
+
 }
 
 // Styles used in the app
